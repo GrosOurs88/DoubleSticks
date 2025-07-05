@@ -10,6 +10,9 @@ public class WeaponsManager : MonoBehaviour
     public GameObject rightVisor = null;
     public float visorsSpeed = 20.0f;
 
+    [HideInInspector] public float screenWidth;
+    [HideInInspector] public float screenHeight;
+
     public float minFusionDistance = 2.0f;
     public float maxUnfusionDistance = 4.5f;
     public Color fusionnedVisorsColor = Color.black;
@@ -22,6 +25,13 @@ public class WeaponsManager : MonoBehaviour
     public string leftVisorTag = "LeftVisor"; //private
     public string rightVisorTag = "RightVisor"; //private
     private bool areVisorsFusionned = false;
+
+    public static WeaponsManager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
@@ -72,11 +82,8 @@ public class WeaponsManager : MonoBehaviour
     private void ClampVisorPosition(GameObject _object)
     {
         //CLAMP FOR SCREEN SPACE CAMERA - Auto update if resolution changes
-        int screenResolutionWidth = Screen.currentResolution.width;
-        int screenResolutionHeight = Screen.currentResolution.height;
-
-        float screenWidth = (screenResolutionWidth * Camera.main.orthographicSize) / screenResolutionHeight;
-        float screenHeight = Camera.main.orthographicSize;
+        screenWidth = (Screen.currentResolution.width * Camera.main.orthographicSize) / Screen.currentResolution.height;
+        screenHeight = Camera.main.orthographicSize;
 
         _object.transform.position = new Vector3(Mathf.Clamp(_object.transform.position.x, -screenWidth, screenWidth),
                                                  Mathf.Clamp(_object.transform.position.y, -screenHeight, screenHeight),

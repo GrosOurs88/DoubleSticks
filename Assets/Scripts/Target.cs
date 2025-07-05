@@ -37,13 +37,13 @@ public class Target : MonoBehaviour
 
     private void Destruction()
     {
-       // Instantiate(targetSO.particleSystemDestruction, transform.position, Quaternion.identity, objectsParentsManager.particleEffectsParent);
+        Instantiate(targetSO.particleSystemDestruction, transform.position, Quaternion.identity, objectsParentsManager.particleEffectsParent);
         Destroy(gameObject);
     }
 
     private void DealDamage()
     {
-       // Instantiate(targetSO.particleSystemDamage, transform.position, Quaternion.identity, objectsParentsManager.particleEffectsParent);
+        Instantiate(targetSO.particleSystemDamage, transform.position, Quaternion.identity, objectsParentsManager.particleEffectsParent);
         Destroy(gameObject);
     }
 }
